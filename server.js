@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 // Connect to MongoDB Atlas using environment variable
 mongoose.connect(process.env.MONGODB_ATLAS_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// Define Todo schema and modeelll
+// Define Todo schema and modeel
 const todoSchema = new mongoose.Schema({
   task: String,
   completed: Boolean,
