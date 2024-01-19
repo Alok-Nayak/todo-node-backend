@@ -31,8 +31,13 @@ app.get('/health', (req, res) => {
 app.get('/api/todos', async (req, res) => {
   try {
     const todos = await Todo.find();
+
+    // Set cache headers to control caching behavior
+    res.setHeader('Cache-Control', 'public, max-age=60'); // Example: Cache for 5 minutes
+
     res.json(todos);
   } catch (error) {
+    console.error('Error in GET /api/todos:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
@@ -46,10 +51,11 @@ app.post('/api/todos', async (req, res) => {
     const savedTodo = await newTodo.save();
     res.json(savedTodo);
   } catch (error) {
+    console.error('Error in POST /api/todos:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on : ${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
