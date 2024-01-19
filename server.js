@@ -33,7 +33,7 @@ app.get('/api/todos', async (req, res) => {
     const todos = await Todo.find();
 
     // Set cache headers to control caching behavior
-    res.setHeader('Cache-Control', 'public, max-age=60'); // Example: Cache for 5 minutes
+    res.setHeader('Cache-Control', 'public, max-age=300'); // Example: Cache for 5 minutes
 
     res.json(todos);
   } catch (error) {
@@ -57,5 +57,5 @@ app.post('/api/todos', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on port : ${PORT}`);
 });
