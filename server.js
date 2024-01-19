@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 // Connect to MongoDB Atlas using environment variable
 mongoose.connect(process.env.MONGODB_ATLAS_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// Define Todo schema and modeel
+// Define Todo schema and model
 const todoSchema = new mongoose.Schema({
   task: String,
   completed: Boolean,
@@ -51,5 +51,5 @@ app.post('/api/todos', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port : ${PORT}`);
+  console.log(`Server is running on : ${PORT}`);
 });
