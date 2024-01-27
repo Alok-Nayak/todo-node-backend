@@ -60,3 +60,5 @@ app.listen(PORT, () => {
   console.log(`Server is running on port : ${PORT}`);
 });
 //test
+
+// db url: mongodb+srv://admin:admin@cluster0.mveunki.mongodb.net/TODO-APP-DB?retryWrites=true&w=majority
