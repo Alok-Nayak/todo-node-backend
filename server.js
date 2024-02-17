@@ -8,17 +8,22 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Use environment variables for MongoDB connection
+const mongoDbUrl = process.env.MONGODB_URI;
+const dbName = process.env.DB_NAME || 'efiling';
+const collectionName = process.env.COLLECTION_NAME || 'todo_app';
+
 app.use(cors());
 app.use(bodyParser.json());
 
-// Connect to MongoDB Atlas using environment variable
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+// Connect to MongoDB using environment variables
+mongoose.connect(mongoDbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// Define Todo schema and model
+// Define Todo schema and model with dynamic collection name
 const todoSchema = new mongoose.Schema({
   task: String,
   completed: Boolean,
-});
+}, { collection: collectionName });
 
 const Todo = mongoose.model('Todo', todoSchema);
 
@@ -59,5 +64,3 @@ app.post('/api/todos', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
 });
-
-// db url: mongodb+srv://admin:admin@cluster0.mveunki.mongodb.net/TODO-APP-DB?retryWrites=true&w=majority
