@@ -11,8 +11,8 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// Connect to MongoDB Atlas using environment variablee
-mongoose.connect(process.env.MONGODB_ATLAS_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+// Connect to MongoDB Atlas using environment variable
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Define Todo schema and model
 const todoSchema = new mongoose.Schema({
@@ -22,9 +22,9 @@ const todoSchema = new mongoose.Schema({
 
 const Todo = mongoose.model('Todo', todoSchema);
 
-// Health check endpoint
+// Simple health check endpoint
 app.get('/health', (req, res) => {
-  res.status(200).send('Health check passed!');
+  res.status(200).send('Server health check passed!');
 });
 
 // API endpoint to get all todos
@@ -55,10 +55,9 @@ app.post('/api/todos', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-//comment
+
 app.listen(PORT, () => {
-  console.log(`Server is running on port : ${PORT}`);
+  console.log(`Server is running on port: ${PORT}`);
 });
-//test
 
 // db url: mongodb+srv://admin:admin@cluster0.mveunki.mongodb.net/TODO-APP-DB?retryWrites=true&w=majority
